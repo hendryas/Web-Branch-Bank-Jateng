@@ -1,8 +1,3 @@
-<div class="loader">
-    <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-</div>
 <div class="alpha-app">
     <div class="page-header">
         <nav class="navbar navbar-expand primary">
@@ -552,14 +547,3 @@
 
 
 </div><!-- App Container -->
-
-<!-- Javascripts -->
-<script src="../../assets/plugins/jquery/jquery-3.4.1.min.js"></script>
-<script src="../../assets/plugins/bootstrap/popper.min.js"></script>
-<script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script src="../../assets/plugins/waves/waves.min.js"></script>
-<script src="../../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../../assets/js/alpha.min.js"></script>
-</body>
-
-</html>

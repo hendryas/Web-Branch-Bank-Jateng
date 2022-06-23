@@ -1,5 +1,8 @@
 <div class="alpha-app">
     <div class="container">
+
+        <?php echo $this->session->flashdata('message'); ?>
+
         <div class="login-container">
             <div class="row justify-content-center row align-items-center">
                 <div class="col-lg-4 col-md-6">
@@ -15,8 +18,11 @@
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" placeholder="Password">
                             </div>
+
                             <a href="index.html" class="btn btn-primary float-right">Sign In</a>
                             <a href="<?= base_url('registration'); ?>" class="btn btn-text-secondary float-right m-r-sm">Sign Up</a>
+
+                            <a href="<?= base_url('forgotpassword'); ?>" class="btn btn-text-secondary float-right m-r-sm mt-3">Forgot Password</a>
                         </div>
                     </div>
                 </div>
