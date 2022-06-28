@@ -3,13 +3,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
+        $this->load->model('Auth_model', 'authModel');
+    }
+
     public function register_csr()
     {
         $this->form_validation->set_rules('name', 'Name', 'required|trim', [
             'required' => 'Nama tidak boleh kosong.'
         ]);
 
-        $this->form_validation->set_rules('username', 'Username', 'required|trim', [
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
             'required' => 'Username tidak boleh kosong.'
         ]);
 
@@ -44,7 +51,8 @@ class Auth extends CI_Controller
             $is_active = 0;
             $date_created = date('Y-m-d H:i:s');
 
-            $password_encrypt = encrypt_url($password); //enkripsi password
+            //enkripsi password
+            $password_encrypt = password_hash($password, PASSWORD_DEFAULT);
 
             $data = [
                 'nama'          => $name,
@@ -60,11 +68,12 @@ class Auth extends CI_Controller
             $user_token = [
                 'email'         => $email,
                 'token'         => $token,
-                'date_created'  => time() //expired token
+                //expired token
+                'date_created'  => time()
             ];
 
-            $this->db->insert('user', $data);
-            $this->db->insert('user_token', $user_token);
+            $this->authModel->insertData($data);
+            $this->authModel->insertDataToken($user_token);
 
             //Setelah data masuk,Kirim email activasi
             $this->_sendEmail($token, 'verify');
@@ -78,16 +87,14 @@ class Auth extends CI_Controller
     private function _sendEmail($token, $type)
     {
         $config = [
-            'protocol'   => 'smtp', //simple mail transfer protocol
-            'smtp_host' => 'smtp-relay.sendinblue.com',
+            'protocol'  => 'smtp', //simple mail transfer protocol
+            'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_user' => 'webbranchbankjateng@gmail.com', //nama email pengirim
-            'smtp_pass' => 'kmzwa8awaa-', //pass email pengirim
-            'smtp_port' => 587, //port smtp google
-            'smtp_crypto' => NULL,
+            'smtp_pass' => 'dflkscvsepgrwqrg', //pass email pengirim
+            'smtp_port' => 465, //port smtp google
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
-            'newline'   => "\r\n",
-            'crlf'   => "\r\n",
+            'newline'   => "\r\n"
         ];
 
         $this->load->library('email', $config);
@@ -101,7 +108,7 @@ class Auth extends CI_Controller
             $this->email->message('Klik link untuk verifikasi akun : <a style="display: inline-block; width: 220px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;" href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '"> Aktivasi </a>'); // bisa di manpulasi memakai HTML
         } elseif ($type == 'forgot') {
             $this->email->subject('Reset Password');
-            $this->email->message('Klik link untuk mereset password : <a style="display: inline-block; width: 220px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;" href="' . base_url() . 'auth/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '"> Reset Password </a>'); // bisa di manpulasi memakai HTML
+            $this->email->message('Klik link untuk mereset password : <a style="display: inline-block; width: 220px; height: 30px; background: #1C3FAA; color: #fff; text-decoration: none; border-radius: 5px; text-align: center; line-height: 30px; font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif;" href="' . base_url() . 'forgotpassword/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '"> Reset Password </a>'); // bisa di manpulasi memakai HTML
         }
 
         if ($this->email->send()) {
@@ -118,28 +125,29 @@ class Auth extends CI_Controller
         $email = $this->input->get('email');
         $token = $this->input->get('token');
 
-        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user = $this->authModel->getDataUserbyEmail($email)->row_array();
+        // $user = $this->db->get_where('user', ['email' => $email])->row_array();
         // $user = $this->db->query("EXEC SP_get_email'" . $email . "'")->row_array();
 
         if ($user) {
-            $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+            $user_token = $this->authModel->getDataUserToken($token)->row_array();
+            // $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
             // $user_token = $this->db->query("EXEC SP_get_user_token'" . $token . "'")->row_array();
 
             if ($user_token) {
                 //di beri waktu 1 hari
                 if (time() - $user_token['date_created'] < (60 * 60 * 24)) {
-                    $this->db->set('is_active', 1);
-                    $this->db->where('email', $email);
-                    $this->db->update('user');
 
-                    $this->db->delete('user_token', ['email' => $email]);
+                    $this->authModel->updateIsActiveUser($email);
+
+                    $this->authModel->deleteDataToken($email);
 
                     $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">' . $email . ' berhasil di aktivasi! Silahkan login.</div>');
                     redirect('login');
                 } else {
 
-                    $this->db->delete('user', ['email' => $email]);
-                    $this->db->delete('user_token', ['email' => $email]);
+                    $this->authModel->deleteData($email);
+                    $this->authModel->deleteDataToken($email);
 
                     $this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">
                     <strong>Token expired! </strong> Aktivasi akunmu gagal.</div>');
@@ -159,16 +167,17 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('nik');
+        $this->session->unset_userdata('username');
         $this->session->unset_userdata('role_id');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">
         <strong>Anda sudah keluar! </strong> Silahkan login untuk melanjutkan kembali.</div>');
-        redirect('auth');
+        redirect('login');
     }
 
     public function blocked()
     {
-        $this->load->view('auth/accessblocked/view_blocked');
+        $data['title'] = 'Halaman Tidak di Temukan';
+        $this->load->view('pages/error-page/404-page', $data);
     }
 }

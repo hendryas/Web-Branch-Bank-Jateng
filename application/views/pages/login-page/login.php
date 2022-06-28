@@ -9,20 +9,23 @@
                     <div class="card login-box">
                         <div class="card-body">
                             <h5 class="card-title">Sign In</h5>
+                            <form action="<?= base_url('login'); ?>" method="post">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo set_value('username'); ?>" required>
+                                    <small class="text-danger"><?php echo form_error('username'); ?></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                    <small class="text-danger"><?php echo form_error('password'); ?></small>
+                                </div>
 
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
-                            </div>
+                                <button type="submit" class="btn btn-primary float-right">Sign In</button>
+                                <a href="<?= base_url('registration'); ?>" class="btn btn-text-secondary float-right m-r-sm">Sign Up</a>
 
-                            <a href="index.html" class="btn btn-primary float-right">Sign In</a>
-                            <a href="<?= base_url('registration'); ?>" class="btn btn-text-secondary float-right m-r-sm">Sign Up</a>
-
-                            <a href="<?= base_url('forgotpassword'); ?>" class="btn btn-text-secondary float-right m-r-sm mt-3">Forgot Password</a>
+                                <a href="<?= base_url('forgotpassword'); ?>" class="btn btn-text-secondary float-right m-r-sm mt-3">Forgot Password</a>
+                            </form>
                         </div>
                     </div>
                 </div>
