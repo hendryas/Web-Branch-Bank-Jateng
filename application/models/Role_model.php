@@ -8,7 +8,7 @@ class Role_model extends CI_Model
         $this->db->insert('role', $data);
     }
 
-    public function getDataUserbyNIK($data)
+    public function getDataUserbyUsername($data)
     {
         $this->db->select('user.*');
         $this->db->from('user');

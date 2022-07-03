@@ -6,6 +6,7 @@ class Role extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        is_logged_in();
         date_default_timezone_set('Asia/Jakarta');
         $this->load->model('Role_model', 'roleModel');
     }
@@ -14,8 +15,8 @@ class Role extends CI_Controller
     {
         $data['title'] = 'Role';
 
-        $sessionNIK = $this->session->userdata('username');
-        $data['user'] = $this->roleModel->getDataUserbyNIK($sessionNIK)->row_array();
+        $sessionUsername = $this->session->userdata('username');
+        $data['user'] = $this->roleModel->getDataUserbyUsername($sessionUsername)->row_array();
 
         $data['role'] = $this->roleModel->getDataRole()->result_array();
 
@@ -45,8 +46,8 @@ class Role extends CI_Controller
     public function roleAccess($role_id)
     {
         $data['title'] = 'Role Access';
-        $sessionNIK = $this->session->userdata('nik');
-        $data['user'] = $this->roleModel->getDataUserbyNIK($sessionNIK)->row_array();
+        $sessionUsername = $this->session->userdata('username');
+        $data['user'] = $this->roleModel->getDataUserbyUsername($sessionUsername)->row_array();
 
         $role_id = decrypt_url($role_id);
         // var_dump($role_id);
@@ -57,11 +58,10 @@ class Role extends CI_Controller
         $this->db->where('id !=', 1);
         $data['menu'] = $this->db->get('menu_level_1')->result_array();
 
-        $this->load->view('templates/vheader/contentadmin/view_index', $data);
-        $this->load->view('templates/vnavbar/navbaradmin/view_index', $data);
-        $this->load->view('templates/vleftsidebar/view_index', $data);
-        $this->load->view('admin/view_roleaccess', $data);
-        $this->load->view('templates/vfooter/contentadmin/view_index');
+        $this->load->view('templates/header-main-page-template/header-main-page', $data);
+        $this->load->view('templates/loader-template/loader');
+        $this->load->view('pages/role-page/view-role-access');
+        $this->load->view('templates/footer-main-page-template/footer-main-page');
     }
 
     public function changeAccess()
@@ -83,9 +83,6 @@ class Role extends CI_Controller
         } else {
             $this->db->delete('user_access_menu', $data);
         }
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">
-        <strong>Access telah di ubah!</strong> </div>');
     }
 
     public function deleteRole($role_id)
@@ -96,7 +93,7 @@ class Role extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">
         <strong>Data role telah dihapus!</strong></div>');
-        redirect('admin/cadmin/admin/role');
+        redirect('role');
     }
 
     public function editRole()
@@ -111,6 +108,6 @@ class Role extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">
         <strong>Data role telah diubah!</strong></div>');
-        redirect('admin/cadmin/admin/role');
+        redirect('role');
     }
 }

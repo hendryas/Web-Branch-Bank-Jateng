@@ -1,10 +1,46 @@
-<!-- Javascripts -->
-<script src=" <?= base_url('assets/plugins/jquery/jquery-3.4.1.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/bootstrap/popper.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/bootstrap/js/bootstrap.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/waves/waves.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/js/alpha.min.js'); ?> "></script>
+<!-- jQuery  -->
+
+
+<script src=" <?= base_url('assets/js/bootstrap.bundle.min.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/modernizr.min.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/detect.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/fastclick.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.slimscroll.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.blockUI.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/waves.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.nicescroll.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.scrollTo.min.js'); ?> "></script>
+
+<!-- Required datatable js -->
+<script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/dataTables.bootstrap4.min.js'); ?>"></script>
+
+<!-- Buttons examples -->
+<script src="<?= base_url('assets/plugins/datatables/dataTables.buttons.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/buttons.bootstrap4.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/jszip.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/pdfmake.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/vfs_fonts.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/buttons.html5.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/buttons.print.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/buttons.colVis.min.js'); ?>"></script>
+
+<!-- Responsive examples -->
+<script src="<?= base_url('assets/plugins/datatables/dataTables.responsive.min.js'); ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables/responsive.bootstrap4.min.js'); ?>"></script>
+
+<!-- Datatable init js -->
+<script src="<?= base_url('assets/pages/datatables.init.js'); ?> "></script>
+
+<!-- App js -->
+<script src=" <?= base_url('assets/js/app.js'); ?> "></script>
+
+<!-- Font Awesome Pro Js -->
+<script src="<?php echo base_url(); ?>assets/plugins/font-awesome-pro-master/js/pro.min.js"></script>
+
+<!-- Font Awesome Js -->
+<script src="<?php echo base_url(); ?>assets/js/fontawesome5.min.js"></script>
+
 </body>
 
 </html>

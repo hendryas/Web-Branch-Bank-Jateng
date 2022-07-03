@@ -1,10 +1,18 @@
-<!-- Javascripts -->
-<script src=" <?= base_url('assets/plugins/jquery/jquery-3.4.1.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/bootstrap/popper.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/bootstrap/js/bootstrap.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/waves/waves.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js'); ?> "></script>
-<script src=" <?= base_url('assets/js/alpha.min.js'); ?> "></script>
+<!-- jQuery  -->
+<script src=" <?= base_url('assets/js/jquery.min.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/bootstrap.bundle.min.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/modernizr.min.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/detect.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/fastclick.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.slimscroll.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.blockUI.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/waves.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.nicescroll.js'); ?> "></script>
+<script src=" <?= base_url('assets/js/jquery.scrollTo.min.js'); ?> "></script>
+
+<!-- App js -->
+<script src=" <?= base_url('assets/js/app.js'); ?> "></script>
+
 </body>
 
 </html>

@@ -1,92 +1,114 @@
-<div class="alpha-app">
-    <?php
-    $this->load->view('templates/navbar-page-template/navbar-page');
-    ?>
+<!-- Begin page -->
+<div id="wrapper">
 
+    <!-- ========== Left Sidebar Start ========== -->
     <?php
     $this->load->view('templates/sidebar-page-template/sidebar-page');
     ?>
 
-    <div class="page-wrapper">
-        <!-- Page Content-->
-        <div class="page-content">
+    <!-- Start right Content here -->
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="card m-b-30">
-                            <div class="card-body">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
 
-                                <h4 class="mt-0 header-title">Halaman Data Menu Management Level 2</h4>
-                                <p class="text-muted m-b-30 font-14">
-                                    Pada halaman ini admin dapat menambahkan menu level 2,
-                                    mengedit menu level 2, serta menghapus menu level 2.
-                                    Untuk memulai penambahan menu level 2 silahkan klik tomboh <b>Tambah Menu level 2</b> dibawah ini.
-                                </p>
+            <!-- Top Bar Start -->
+            <?php
+            $this->load->view('templates/navbar-page-template/navbar-page');
+            ?>
 
-                                <?php if (validation_errors()) : ?>
-                                    <div class="alert alert-danger text-center" role="alert">
-                                        <?php echo validation_errors(); ?>
-                                    </div>
-                                <?php endif; ?>
+            <div class="page-content-wrapper ">
 
-                                <?php echo $this->session->flashdata('message'); ?>
+                <div class="container-fluid">
 
-                                <a href="#" class="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal" data-target="#newHasSubMenuModal">Tambahkan submenu level 2 baru</a>
-                                <div class="table-responsive">
-                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>#</th>
-                                                <th>Title</th>
-                                                <th>Menu Level 1</th>
-                                                <th>Url</th>
-                                                <th>Active</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $no = 1; ?>
-                                            <?php foreach ($menuleveldua as $mld) : ?>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="float-right page-breadcrumb">
+                                <!-- <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                    <li class="breadcrumb-item active">Starter</li>
+                                </ol> -->
+                            </div>
+                            <h5 class="page-title"><?= $title; ?></h5>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="card m-b-30">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Halaman Data Menu Management Level 2</h4>
+                                    <p class="text-muted m-b-30 font-14">
+                                        Pada halaman ini admin dapat menambahkan menu level 2,
+                                        mengedit menu level 2, serta menghapus menu level 2.
+                                        Untuk memulai penambahan menu level 2 silahkan klik tomboh <b>Tambah Menu level 2</b> dibawah ini.
+                                    </p>
+
+                                    <?php echo $this->session->flashdata('message'); ?>
+
+                                    <a href="#" class="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal" data-target="#newHasSubMenuModal">Tambah Menu Level 2</a>
+
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
                                                 <tr class="text-center">
-                                                    <th scope="row"><?php echo $no; ?></th>
-                                                    <td><?php echo $mld['title']; ?></td>
-                                                    <td><?php echo $mld['title2']; ?></td>
-                                                    <td><?php echo $mld['url']; ?></td>
-                                                    <?php if ($mld['is_active'] == 1) : ?>
-                                                        <td>
-                                                            <p>Aktif</p>
-                                                        </td>
-                                                    <?php elseif ($mld['is_active'] == 0) : ?>
-                                                        <td>
-                                                            <p>Tidak Aktif</p>
-                                                        </td>
-                                                    <?php endif; ?>
-                                                    <td>
-                                                        <a href="#"><span class="btn btn-sm btn-success waves-effect waves-light" data-toggle="modal" data-target="#newEditMenuLevelDuaModal<?php echo $mld['id']; ?>">Edit</span></a>
-                                                        <a class="btn-hapus" href="<?php echo base_url('menu/deletemenuleveldua/') . $mld['id']; ?>"><span class="btn btn-sm btn-danger waves-effect waves-light">Delete</span></a>
-                                                    </td>
+                                                    <th>#</th>
+                                                    <th>Title</th>
+                                                    <th>Menu Level 1</th>
+                                                    <th>Url</th>
+                                                    <th>Active</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                                <?php $no++; ?>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($menuleveldua as $mld) : ?>
+                                                    <tr class="text-center">
+                                                        <th scope="row"><?php echo $no; ?></th>
+                                                        <td><?php echo $mld['title']; ?></td>
+                                                        <td><?php echo $mld['title2']; ?></td>
+                                                        <td><?php echo $mld['url']; ?></td>
+                                                        <?php if ($mld['is_active'] == 1) : ?>
+                                                            <td>
+                                                                Aktif
+                                                            </td>
+                                                        <?php elseif ($mld['is_active'] == 0) : ?>
+                                                            <td>
+                                                                Tidak Aktif
+                                                            </td>
+                                                        <?php endif; ?>
+                                                        <td>
+                                                            <a href="#"><span class="btn btn-sm btn-success waves-effect waves-light" data-toggle="modal" data-target="#newEditMenuLevelDuaModal<?php echo $mld['id']; ?>">Edit</span></a>
+                                                            <a class="btn-hapus" href="<?php echo base_url('menu/deletemenuleveldua/') . $mld['id']; ?>"><span class="btn btn-sm btn-danger waves-effect waves-light">Delete</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $no++; ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> <!-- end col -->
-                    <!--end col-->
-                </div>
+                        </div> <!-- end col -->
+                        <!--end col-->
+                    </div>
+                </div><!-- container fluid -->
 
+            </div> <!-- Page content Wrapper -->
 
-            </div><!-- container -->
-            <!--end footer-->
-        </div>
-        <!-- end page content -->
+        </div> <!-- content -->
+
+        <?php
+        $this->load->view('templates/footer-text/footer');
+        ?>
+
     </div>
-    <!-- end page-wrapper -->
-</div><!-- App Container -->
+    <!-- End Right content here -->
 
+</div>
+<!-- END wrapper -->
 
 <!-- START TAMBAH SUBMENU MODAL -->
 <div class="modal fade" id="newHasSubMenuModal" tabindex="-1" aria-labelledby="newHasSubMenuModalLabel" aria-hidden="true">
@@ -99,7 +121,7 @@
                 </button>
             </div>
 
-            <form action="<?php echo base_url(); ?>menu/menulevel2" method="POST">
+            <form action="<?php echo base_url(); ?>menulevel2" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <p>Jika diberi submenu level 3 ,mohon isikan kolom url dengan tanda #</p>
@@ -113,7 +135,7 @@
                         <select name="menu_id" id="menu_id" class="form-control selectpicker" data-live-search="true" required>
                             <option value="">Select Menu</option>
                             <?php foreach ($menu as $m) : ?>
-                                <option value="<?php echo $m['id']; ?>"><?php echo $m['title']; ?></option>
+                                <option value="<?php echo $m['id']; ?>"><?php echo $m['title']; ?> - <?php echo $m['url']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -168,7 +190,7 @@ foreach ($menuleveldua as $mld) :  ?>
                             <select name="id_menu_level_1" id="id_menu_level_1" class="form-control selectpicker" data-live-search="true" required>
                                 <option value="">Select Menu</option>
                                 <?php foreach ($menu as $m) : ?>
-                                    <option value="<?php echo $m['id']; ?>"><?php echo $m['title']; ?></option>
+                                    <option value="<?php echo $m['id']; ?>"><?php echo $m['title']; ?> - <?php echo $m['url']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

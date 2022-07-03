@@ -1,76 +1,102 @@
-<div class="alpha-app">
-    <?php
-    $this->load->view('templates/navbar-page-template/navbar-page');
-    ?>
+<!-- Begin page -->
+<div id="wrapper">
 
+    <!-- ========== Left Sidebar Start ========== -->
     <?php
     $this->load->view('templates/sidebar-page-template/sidebar-page');
     ?>
 
-    <div class="page-wrapper">
-        <!-- Page Content-->
-        <div class="page-content">
+    <!-- Start right Content here -->
 
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="card m-b-30">
-                            <div class="card-body">
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
 
-                                <h4 class="mt-0 header-title">Halaman Data Menu Management Level 1</h4>
-                                <p class="text-muted m-b-30 font-14">
-                                    Pada halaman ini admin dapat menambahkan menu level 1,
-                                    mengedit menu level 1, serta menghapus menu level 1.
-                                    Untuk memulai penambahan menu level 1 silahkan klik tomboh <b>Tambah Menu level 1</b> dibawah ini.
-                                </p>
+            <!-- Top Bar Start -->
+            <?php
+            $this->load->view('templates/navbar-page-template/navbar-page');
+            ?>
 
-                                <?php echo form_error('menu', '<div class="alert alert-danger text-center" role="alert">', '</div>'); ?>
+            <div class="page-content-wrapper ">
 
-                                <?php echo $this->session->flashdata('message'); ?>
+                <div class="container-fluid">
 
-                                <a href="#" class="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal" data-target="#newMenuModal">Tambah Menu Level 1</a>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="float-right page-breadcrumb">
+                                <!-- <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                                    <li class="breadcrumb-item active">Starter</li>
+                                </ol> -->
+                            </div>
+                            <h5 class="page-title"><?= $title; ?></h5>
 
-                                <div class="table-responsive">
-                                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead>
-                                            <tr class="text-center">
-                                                <th>#</th>
-                                                <th>Url Menu</th>
-                                                <th>Nama Menu</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $no = 1; ?>
-                                            <?php foreach ($menu as $m) : ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg">
+                            <div class="card m-b-30">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Halaman Data Menu Management Level 1</h4>
+                                    <p class="text-muted m-b-30 font-14">
+                                        Pada halaman ini admin dapat menambahkan menu level 1,
+                                        mengedit menu level 1, serta menghapus menu level 1.
+                                        Untuk memulai penambahan menu level 1 silahkan klik tomboh <b>Tambah Menu level 1</b> dibawah ini.
+                                    </p>
+
+                                    <?php echo $this->session->flashdata('message'); ?>
+
+                                    <a href="#" class="btn btn-primary waves-effect waves-light mb-3" data-toggle="modal" data-target="#newMenuModal">Tambah Menu Level 1</a>
+
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
                                                 <tr class="text-center">
-                                                    <th scope="row"><?php echo $no; ?></th>
-                                                    <td><?php echo $m['url']; ?></td>
-                                                    <td><?php echo $m['title']; ?></td>
-                                                    <td>
-                                                        <a href="#" class="mr-3"><span class="btn btn-sm btn-success waves-effect waves-light" data-toggle="modal" data-target="#newEditMenuModal<?php echo $m['id']; ?>">Edit</span></a>
-                                                        <a class="btn-hapus" href="<?php echo base_url('menu/deletemenu/') . encrypt_url($m['id']); ?>"><span class="btn btn-sm btn-danger waves-effect waves-light">Delete</span></a>
-                                                    </td>
+                                                    <th>#</th>
+                                                    <th>Url Menu</th>
+                                                    <th>Nama Menu</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                                <?php $no++; ?>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php $no = 1; ?>
+                                                <?php foreach ($menu as $m) : ?>
+                                                    <tr class="text-center">
+                                                        <th scope="row"><?php echo $no; ?></th>
+                                                        <td><?php echo $m['url']; ?></td>
+                                                        <td><?php echo $m['title']; ?></td>
+                                                        <td>
+                                                            <a href="#" class="mr-3"><span class="btn btn-sm btn-success waves-effect waves-light" data-toggle="modal" data-target="#newEditMenuModal<?php echo $m['id']; ?>">Edit</span></a>
+                                                            <a class="btn-hapus" href="<?php echo base_url('menu/deletemenu/') . encrypt_url($m['id']); ?>"><span class="btn btn-sm btn-danger waves-effect waves-light">Delete</span></a>
+                                                        </td>
+                                                    </tr>
+                                                    <?php $no++; ?>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> <!-- end col -->
-                    <!--end col-->
-                </div>
+                        </div> <!-- end col -->
+                        <!--end col-->
+                    </div>
+                </div><!-- container fluid -->
 
-            </div><!-- container -->
+            </div> <!-- Page content Wrapper -->
 
-            <!--end footer-->
-        </div>
-        <!-- end page content -->
+        </div> <!-- content -->
+
+        <?php
+        $this->load->view('templates/footer-text/footer');
+        ?>
+
     </div>
-    <!-- end page-wrapper -->
-</div><!-- App Container -->
+    <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
 
 
 <!-- START TAMBAH MENU MODAL -->
@@ -96,6 +122,14 @@
                     <div class="form-group">
                         <label for="icon">Icon</label>
                         <input type="text" class="form-control" id="icon" name="icon" placeholder="Menu icon" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="status_sub">Status Sub</label>
+                        <select name="status_sub" id="status_sub" class="form-control selectpicker" data-live-search="true" required>
+                            <option value="">Select Menu</option>
+                            <option value="1">Add Menu Level 2</option>
+                            <option value="0">Tidak Beri Menu Level 2</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -134,6 +168,14 @@ foreach ($menu as $m) :  ?>
                         <div class="form-group">
                             <label for="icon">Icon</label>
                             <input type="text" class="form-control" id="icon" name="icon" placeholder="Menu icon" autocomplete="off" value="<?php echo $m['icon']; ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status_sub">Status Sub</label>
+                            <select name="status_sub" id="status_sub" class="form-control selectpicker" data-live-search="true" required>
+                                <option value="">Select Menu</option>
+                                <option value="1">Add Menu Level 2</option>
+                                <option value="0">Tidak Beri Menu Level 2</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

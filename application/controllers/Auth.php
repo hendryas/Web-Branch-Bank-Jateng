@@ -126,13 +126,9 @@ class Auth extends CI_Controller
         $token = $this->input->get('token');
 
         $user = $this->authModel->getDataUserbyEmail($email)->row_array();
-        // $user = $this->db->get_where('user', ['email' => $email])->row_array();
-        // $user = $this->db->query("EXEC SP_get_email'" . $email . "'")->row_array();
 
         if ($user) {
             $user_token = $this->authModel->getDataUserToken($token)->row_array();
-            // $user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
-            // $user_token = $this->db->query("EXEC SP_get_user_token'" . $token . "'")->row_array();
 
             if ($user_token) {
                 //di beri waktu 1 hari
